@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg-info/
+.venv/
+venv/
+ENV/
+
+# VCS
+.git/
+.gitignore
+
+# OS/IDE
+.DS_Store
+.idea/
+.vscode/
+
+# Local env
+.env
+.env.*
+
+# Node (if ever present, not used now)
+node_modules/

@@ -1,0 +1,57 @@
+<section id="board" class="board">
+  <div class="columns">
+    {% for key, label in statuses %}
+    <div class="column column-{{ key }}">
+      <header class="column-header">
+        <h2>{{ label }}</h2>
+        <span class="count">{{ (tasks[key] | length) if tasks[key] else 0 }}</span>
+      </header>
+      <ul class="cards">
+        {% for task in tasks[key] %}
+        <li class="card priority-{{ task.priority }}">
+          <div class="card-body">
+            <div class="card-header">
+              <h3 class="title">{{ task.title }}</h3>
+              <span class="priority badge {{ task.priority }}">{{ task.priority|capitalize }}</span>
+            </div>
+            {% if task.description %}
+            <p class="desc">{{ task.description }}</p>
+            {% endif %}
+            <div class="meta">
+              <span>Created: {{ task.created_at.strftime('%Y-%m-%d %H:%M') }}Z</span>
+            </div>
+          </div>
+          <div class="card-actions">
+            <button
+              class="btn"
+              hx-get="/tasks/{{ task.id }}/analysis"
+              hx-target="#analysis-panel"
+              hx-swap="innerHTML"
+              hx-indicator="#htmx-indicator"
+            >Analyze</button>
+
+            <div class="move-group">
+              {% for s_key, s_label in statuses %}
+                {% if s_key != task.status %}
+                <button
+                  class="btn small ghost"
+                  title="Move to {{ s_label }}"
+                  hx-patch="/tasks/{{ task.id }}/status"
+                  hx-vals='{"status":"{{ s_key }}"}'
+                  hx-target="#board"
+                  hx-swap="outerHTML"
+                  hx-indicator="#htmx-indicator"
+                >→ {{ s_label }}</button>
+                {% endif %}
+              {% endfor %}
+            </div>
+          </div>
+        </li>
+        {% else %}
+        <li class="empty">No tasks yet.</li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endfor %}
+  </div>
+</section>

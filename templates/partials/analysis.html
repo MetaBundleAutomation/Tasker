@@ -1,0 +1,23 @@
+<h2>Analysis</h2>
+<div class="analysis">
+  <h3>{{ task.title }}</h3>
+  {% if task.description %}
+  <p class="desc">{{ task.description }}</p>
+  {% endif %}
+
+  <div class="insights">
+    <p class="summary">{{ insights.summary }}</p>
+
+    <h4>Suggested TODOs</h4>
+    <ol class="todos">
+      {% for item in insights.suggested_todos %}
+      <li>{{ item }}</li>
+      {% endfor %}
+    </ol>
+
+    <div class="kv">
+      <span class="key">Category</span>
+      <span class="val badge">{{ insights.category|capitalize }}</span>
+    </div>
+  </div>
+</div>

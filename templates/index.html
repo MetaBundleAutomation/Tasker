@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="layout">
+  <aside class="panel">
+    <h2>Create Task</h2>
+    <form
+      class="stack"
+      hx-post="/tasks"
+      hx-target="#board"
+      hx-swap="outerHTML"
+      hx-indicator="#htmx-indicator"
+    >
+      <label>
+        <span>Title</span>
+        <input type="text" name="title" required placeholder="Short, action-oriented title" />
+      </label>
+
+      <label>
+        <span>Description</span>
+        <textarea name="description" rows="4" placeholder="Optional details"></textarea>
+      </label>
+
+      <label>
+        <span>Priority</span>
+        <select name="priority">
+          <option value="low">Low</option>
+          <option value="medium" selected>Medium</option>
+          <option value="high">High</option>
+        </select>
+      </label>
+
+      <button type="submit" class="btn primary">Add Task</button>
+    </form>
+
+    <div class="hint">
+      <strong>Tip:</strong> Use the "Analyze" button on any card to see placeholder insights. We'll plug in LLMs later.
+    </div>
+  </aside>
+
+  {% include "partials/board.html" %}
+
+  <aside id="analysis-panel" class="panel">
+    <h2>Analysis</h2>
+    <p>Select a task and click <em>Analyze</em> to see insights here.</p>
+  </aside>
+</section>
+{% endblock %}
