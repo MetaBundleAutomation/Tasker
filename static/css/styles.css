@@ -64,7 +64,7 @@ textarea{resize:vertical}
 .empty{color:var(--muted);font-style:italic;border:1px dashed var(--border);border-radius:10px;padding:1rem;text-align:center}
 
 .indicator{position:fixed;right:1rem;bottom:1rem;background:var(--primary);color:#fff;padding:.5rem .75rem;border-radius:999px;box-shadow:0 8px 24px rgba(0,0,0,.3);opacity:0;transform:translateY(10px);transition:.2s}
-.htmx-request .indicator{opacity:1;transform:none}
+.indicator.htmx-request{opacity:1;transform:none}
 
 @media (max-width: 1100px){
   .layout{grid-template-columns:1fr;}
